@@ -9,9 +9,8 @@
 
 int main(int argc, char *argv[])
 {
-    // char *filepath = argv[1];
 
-    char *filepath = "source.txt";
+    char *filepath = argv[1];
 
     int fd = open(filepath, O_RDONLY);
 
@@ -21,9 +20,11 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    char buffer[10000];
-    read(fd, buffer, 10000);
-    printf("%s", buffer);
+    char buffer[2];
+    while (read(fd, buffer, 1) != 0)
+        printf("%s", buffer);
+
     close(fd);
+
     return 0;
 }
