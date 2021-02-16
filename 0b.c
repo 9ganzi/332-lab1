@@ -9,7 +9,7 @@
 int main(int argc, char *argv[])
 {
     int fd;
-    fd = open("destination.txt", O_RDONLY|O_CREAT);
+    fd = open("destination.txt", O_RDWR|O_CREAT);
     if (fd == -1)
     {
         printf("\n open() failed with error [%s]\n", strerror(errno));
