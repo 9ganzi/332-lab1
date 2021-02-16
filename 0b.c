@@ -15,6 +15,6 @@ int main(int argc, char *argv[])
         printf("\n open() failed with error [%s]\n", strerror(errno));
         return 1;
     }
-    int c = close(fd);
+    close(fd);
     return 0;
 }
