@@ -12,25 +12,40 @@ int main(int argc, char *argv[])
     else
     {
         if (errno == ENOENT)
+        {
             printf("%s does not exist\n", filepath);
+            perror("access");
+        }
         else if (errno == EACCES)
+        {
             printf("%s is not accessible\n", filepath);
+            perror("access");
+        }
         return 0;
     }
 
     // Check read access;
     int returnval2 = access(filepath, R_OK);
     if (returnval == 0)
+    {
         printf("\n %s is readable\n", filepath);
+    }
     else
+    {
         printf("\n %s is not readable\n", filepath);
-    
+        perror("access");
+    }
+
     // Check write access;
     int returnval3 = access(filepath, W_OK);
     if (returnval3 == 0)
+    {
         printf("\n %s is writable\n", filepath);
+    }
     else
+    {
         printf("\n %s is not writable\n", filepath);
-    
+        perror("access");
+    }
     return 0;
 }

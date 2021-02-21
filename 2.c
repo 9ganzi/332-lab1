@@ -11,9 +11,23 @@ int main(int argc, char *argv[])
     int fd1 = open("source.txt", O_RDONLY);
     int fd2 = open("destination.txt", O_WRONLY);
 
-    char buffer[2];
-    while (read(fd1, buffer, 1))
-        write(fd2, buffer, 1);
+    if ((fd1 == -1) || (fd2 == -1))
+    {
+        printf("\nopen() failed\n");
+        perror("open");
+    }
+
+    char buffer[100];
+    int count = (read(fd1, buffer, 100));
+
+    // loop until there's no content left to read
+    while (count != 0)
+    {
+        // writing to "destination.txt"
+        write(fd2, buffer, count);
+        count = (read(fd1, buffer, 100));
+    }
+
     close(fd1);
     close(fd2);
     return 0;

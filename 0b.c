@@ -9,10 +9,13 @@
 int main(int argc, char *argv[])
 {
     int fd;
+
+    // open file if exist, create file if it doesn't exist
     fd = open("destination.txt", O_RDWR|O_CREAT);
     if (fd == -1)
     {
-        printf("\n open() failed with error [%s]\n", strerror(errno));
+        printf("\n open() failed\n");
+        perror("open");
         return 1;
     }
     close(fd);

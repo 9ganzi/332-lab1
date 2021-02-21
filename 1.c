@@ -16,13 +16,22 @@ int main(int argc, char *argv[])
 
     if (fd == -1)
     {
-        printf("\n open() failed with error [%s]\n", strerror(errno));
+        printf("\n open() failed\n");
+        perror("open");
         return 1;
     }
 
-    char buffer[2];
-    while (read(fd, buffer, 1) != 0)
-        printf("%s", buffer);
+    char buffer[100];
+    int count = read(fd, buffer, 100);
+    // loop until there's no content left to read
+    while (count != 0)
+    {
+        // print to terminal
+        write(1, buffer, count);
+        // write to buffer
+        count = read(fd, buffer, 100);
+    }
+
 
     close(fd);
 
